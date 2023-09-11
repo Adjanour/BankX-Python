@@ -1,5 +1,11 @@
 from Classes import *
 from functions import *
 
-SignUp()
+accounts  = {}
+
+game = sign_up()
+update_dict = {game[1]:game[2]}
+accounts.update(update_dict)
+
+print(accounts)
 

@@ -20,6 +20,9 @@ class Customer(Person):
     
     def get_username_password(self):
         return self.__user_name , self.__password
+    
+    def get__name(self):
+        return self.__name
 
 class Employee(Person):
     def __init__(self, name, age, gender, title,employee_id,salary=None):
@@ -27,10 +30,10 @@ class Employee(Person):
         self.__employee_id = employee_id
         self.__salary = salary
 
-    def __get_employee_id(self):
+    def get_employee_id(self):
         return self.__employee_id
     
-    def __set_employee_id(self,new_employee_id):
+    def set_employee_id(self,new_employee_id):
         self.__employee_id = new_employee_id
         return f"Employee Id changed successfully"
 
@@ -45,7 +48,7 @@ class Account:
         self.__account_owner = Customer(account_owner_name,account_owner_id,account_owner_gender,account_owner_age,account_owner_title,account_owner_password,account_owner_username)
         self.__account_created_date = account_created_date
         self.__account_pin = account_pin
-        Account.Accounts.update({self.__account_owner:[self.__account_no,self.__account_created_date]})
+        Account.Accounts.update({self.__account_owner:[self.__account_no,self.__account_created_date,self.__account_pin,self]})
 
     def deposit(self,deposit_amount):
         available_balance = self.__account_balance

@@ -191,19 +191,41 @@ def login_interface():
 
 
 def RetrieveAccounts():
-     pass
+    return Account.Accounts
+
 def RetrieveCustomers():
-     pass
+    return Customer.Customers
+
 def RetrieveEmployees():
-     pass
-def DepositMoney():
-     pass
-def WithdrawMoney():
-     pass
-def RetrieveBalance():
-     pass
-def DeleteAccount():
-     pass
+    return Employee.Employees
+
+def DepositMoney(account_number,deposit_amount,pin):
+    # Find the account by account_number, update its balance
+    if account_number == Account.Accounts.values()[0]:
+        account = Account.Accounts.values()[3]
+        pin = int(input("Please Enter Your Pin"))
+        if pin == int(Account.Accounts.values()[2]):
+            account.deposit(deposit_amount)
+
+def WithdrawMoney(account_number,deposit_amount,pin):
+     if account_number == Account.Accounts.values()[0]:
+        account = Account.Accounts.values()[3]
+        pin = int(input("Please Enter Your Pin"))
+        if pin == int(Account.Accounts.values()[2]):
+            account.withdraw(deposit_amount)
+def RetrieveBalance(account_number,pin):
+    if account_number == Account.Accounts.values()[0]:
+        account = Account.Accounts.values()[3]
+        pin = int(input("Please Enter Your Pin"))
+        if pin == int(Account.Accounts.values()[2]):
+            account.get_balance()
+
+def DeleteAccount(account_number):
+    if account_number == Account.Accounts.values()[0]:
+        account = Account.Accounts.values()[3]
+        pin = int(input("Please Enter Your Pin"))
+        if pin == int(Account.Accounts.values()[2]):
+            del account
 
 
 
