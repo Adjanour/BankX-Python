@@ -9,12 +9,17 @@ class Person:
 
 
 class Customer(Person):
-    def __init__(self,name,customer_id,gender,age,title):
+    def __init__(self,name,customer_id,gender,age,title,username,password):
         super().__init__(name,gender,age,title)
         self.__customer_id = customer_id
+        self.__user_name = username
+        self.__password = password
 
-    def __get__customer_id(self):
+    def get__customer_id(self):
         return self.__customer_id
+    
+    def get_username_password(self):
+        return self.__user_name , self.__password
 
 class Employee(Person):
     def __init__(self, name, age, gender, title,employee_id,salary=None):
@@ -32,12 +37,12 @@ class Employee(Person):
 
 class Account:
     Accounts = {}
-    def __init__(self,account_no,account_owner_id,account_owner_name,account_owner_gender,account_owner_age,account_owner_title,initial_deposit,account_type,account_pin,account_created_date = datetime.datetime.now):
+    def __init__(self,account_no,account_owner_id,account_owner_name,account_owner_gender,account_owner_age,account_owner_title,initial_deposit,account_type,account_pin,account_owner_username,account_owner_password,account_created_date = datetime.datetime.now):
         self.__account_no = account_no
         self.__initial_deposit = initial_deposit
         self.__account_balance = initial_deposit
         self.__account__type = account_type
-        self.__account_owner = Customer(account_owner_name,account_owner_id,account_owner_gender,account_owner_age,account_owner_title)
+        self.__account_owner = Customer(account_owner_name,account_owner_id,account_owner_gender,account_owner_age,account_owner_title,account_owner_password,account_owner_username)
         self.__account_created_date = account_created_date
         self.__account_pin = account_pin
         Account.Accounts.update({self.__account_owner:[self.__account_no,self.__account_created_date]})
