@@ -1,5 +1,7 @@
 from Classes import *
 import uuid 
+import bcrypt
+
 runing = 1
 
 def chooseWhoYouAre():
@@ -31,23 +33,26 @@ def CustomerDisplay():
     print("Hello Customer, Welcome to Salem Bank")
     print("Please select an option from the menu below")
     print("1. SignUp")
-    print("2. Deposit Money")
-    print("3. Withdraw Money")
-    print("4. View Balance")
-    print("5. Delete Account")
-    print("6. Exit")
+    print("2.Login")
+    print("3. Deposit Money")
+    print("4. Withdraw Money")
+    print("5. View Balance")
+    print("6. Delete Account")
+    print("7. Exit")
     userInput = int(input("What are you doing Today: "))
     if userInput == 1:
-            SignUp()
+            sign_up()
     elif userInput == 2:
+           login_interface()
+    elif userInput == 3:
             DepositMoney()
-    elif userInput== 3:
-            WithdrawMoney()
     elif userInput== 4:
+            WithdrawMoney()
+    elif userInput== 5:
             RetrieveBalance
-    elif userInput == 5:
-            DeleteAccount()
     elif userInput == 6:
+            DeleteAccount()
+    elif userInput == 7:
             Exit(runing,False)
     
 
@@ -120,7 +125,12 @@ def sign_up_interface():
     gender = input("Enter your gender: ")
     age = input("Enter your age: ")
     title = input("Enter your title: ")
-    
+    username = input("Enter your Username: ")
+    # Validate or obtain a strong password
+    password = input("Enter your Password: ")
+    while len(password)  < 6:
+        print("Enter a password with length greater than Six characters")
+        password = input("Enter your Password: ")
     # Validate and obtain a four-digit PIN
     pin = input("Enter a four-digit PIN: ")
     while not pin.isdigit() or len(pin) != 4:
@@ -139,21 +149,47 @@ def sign_up_interface():
 
     initial_deposit = int(input("Enter your initial deposit: "))
     
-    return [name, gender, age, title, pin, account_type, initial_deposit]
+    return [name, gender, age, title, pin, account_type, initial_deposit,username,password]
 
 def sign_up():
     user_input = sign_up_interface()
-    name, gender, age, title, pin, account_type, initial_deposit = user_input
+    name, gender, age, title, pin, account_type, initial_deposit,username,password= user_input
     
     # Generate unique customer and account IDs 
     customer_id = Generate_Id()
     account_no = Generate_Id()
     
     # Create a new customer account
-    account = Account(account_no, customer_id, name, gender, age, title, initial_deposit, account_type, pin)
+    account = Account(account_no, customer_id, name, gender, age, title, initial_deposit, account_type, pin,username,password)
     
     print("Registration successful!")
-    
+     #return account
+    return account.get_account_owner().get_username_password()
+
+
+def get_user_credentials():
+    username = input("Name: ")
+    password = input("Pin: ")
+    return username, password
+
+def login(username, password,user_database):
+    if username in user_database.keys():
+        hashed_password = user_database[username]
+        if bcrypt.checkpw(password.encode("utf-8"), hashed_password):
+            return True
+    return False
+
+def login_interface():
+    while True:
+        print("Please Enter your Credentials")
+        username, password = get_user_credentials()
+        if login(username, password):
+            print("Login successful!")
+            break
+        else:
+            print("Login failed. Please try again.")
+
+
 def RetrieveAccounts():
      pass
 def RetrieveCustomers():
@@ -168,6 +204,7 @@ def RetrieveBalance():
      pass
 def DeleteAccount():
      pass
+
 
 
 def Exit(var,value):
