@@ -2,10 +2,10 @@ import datetime
 
 class Person:
     def __init__(self,name,age,gender,title):
-        self.__name = name
-        self.__age = age
-        self.__gender = gender
-        self.__title = title
+        self._name = name
+        self._age = age
+        self._gender = gender
+        self._title = title
 
 
 class Customer(Person):
@@ -39,7 +39,7 @@ class Employee(Person):
 
 
 class Account:
-    Accounts = {}
+    Accounts = []
     def __init__(self,account_no,account_owner_id,account_owner_name,account_owner_gender,account_owner_age,account_owner_title,initial_deposit,account_type,account_pin,account_owner_username,account_owner_password,account_created_date = datetime.datetime.now):
         self.__account_no = account_no
         self.__initial_deposit = initial_deposit
@@ -48,7 +48,7 @@ class Account:
         self.__account_owner = Customer(account_owner_name,account_owner_id,account_owner_gender,account_owner_age,account_owner_title,account_owner_password,account_owner_username)
         self.__account_created_date = account_created_date
         self.__account_pin = account_pin
-        Account.Accounts.update({self.__account_owner:[self.__account_no,self.__account_created_date,self.__account_pin,self]})
+        Account.Accounts.update([self.__account_owner,self.__account_no,self.__account_created_date,self.__account_pin,self])
 
     def deposit(self,deposit_amount):
         available_balance = self.__account_balance

@@ -24,7 +24,6 @@ def initial_display(user_type=None):
         print("Hello, Welcome to Salem Bank")
         user_type = chooseWhoYouAre()
         if user_type == 1:
-            print(f"Hello Customer, Welcome!")
             while running:
                 customer_display()
         elif user_type == 2:
