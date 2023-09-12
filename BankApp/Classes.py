@@ -53,7 +53,7 @@ class Account:
     def deposit(self,deposit_amount):
         available_balance = self.__account_balance
         self.__account_balance += deposit_amount
-        return f"Deposit made succesfully. Current balance is {self.__balance}. Available balance is {available_balance}"
+        return f"Deposit made succesfully. Current balance is {self.__account_balance}. Available balance is {available_balance}"
     
     def withdraw(self,withdrawal_ammount):
         assert self.__account_balance >= withdrawal_ammount, f"Withdrawal ammount cannot execeed your Balance"

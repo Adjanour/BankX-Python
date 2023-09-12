@@ -66,8 +66,10 @@ def customer_display():
     elif user_input == 4:
         withdraw_money()
     elif user_input == 5:
-        retrieve_balance()
+        name,pin = general_interface()
+        retrieve_balance(name,pin)
     elif user_input == 6:
+        name,pin = general_interface()
         delete_account()
     elif user_input == 7:
         running = False
@@ -180,23 +182,54 @@ def retrieve_employees():
 
 def deposit_money(account_owner_name,deposit_amount,pin):
     # Find the account by account_number, update its balance
-    if account_owner_name == Account.Accounts[0][5]:
-        account = Account.Accounts.values()[0][4]
-        pin = int(input("Please Enter Your Pin"))
-        if pin == int(Account.Accounts[0][3]):
-            account.deposit(deposit_amount)
+    correct = False
+    while correct == False:
+        if account_owner_name == Account.Accounts[0][5]:
+            account = Account.Accounts[0][4]
+            if pin == int(Account.Accounts[0][3]):
+               result =  account.deposit(deposit_amount)
+               correct = True
+               print(result)
+            else:
+                correct  = False
+                print("Invalid Credentials Please try again")
+                break
+        else:
+            correct = False
+            print("Invalid Credentials Please try again")
+            break
 
 def withdraw_money():
     # Implement logic for withdrawing money
     pass
 
-def retrieve_balance():
-    # Implement logic for retrieving account balance
-    pass
+def retrieve_balance(account_owner_name,pin):
+    # Implementation of  logic for retrieving account balance
+    correct = False
+    while correct == False:
+        if account_owner_name == Account.Accounts[0][5]:
+            account = Account.Accounts[0][4]
+            if pin == int(Account.Accounts[0][3]):
+               result =  account.get_balance(True)
+               correct = True
+               print(result)
+            else:
+                correct  = False
+                print("Invalid Credentials Please try again")
+                break
+        else:
+            correct = False
+            print("Invalid Credentials Please try again")
+            break
 
 def delete_account():
     # Implement logic for deleting an account
     pass
+
+def general_interface():
+    name = input("Please Enter your Name: ")
+    pin = int(input("Please Enter Your Pin: "))
+    return name,pin
 
 def main():
     initial_display()
