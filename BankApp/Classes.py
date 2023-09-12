@@ -11,18 +11,18 @@ class Person:
 class Customer(Person):
     def __init__(self,name,customer_id,gender,age,title,username,password):
         super().__init__(name,gender,age,title)
-        self.__customer_id = customer_id
-        self.__user_name = username
-        self.__password = password
+        self._customer_id = customer_id
+        self._user_name = username
+        self._password = password
 
     def get__customer_id(self):
-        return self.__customer_id
+        return self._customer_id
     
     def get_username_password(self):
-        return self.__user_name , self.__password
+        return self._user_name , self._password
     
     def get_name(self):
-        return self.__name
+        return super()._name
 
 class Employee(Person):
     def __init__(self, name, age, gender, title,employee_id,salary=None):
@@ -48,7 +48,7 @@ class Account:
         self.__account_owner = Customer(account_owner_name,account_owner_id,account_owner_gender,account_owner_age,account_owner_title,account_owner_password,account_owner_username)
         self.__account_created_date = account_created_date
         self.__account_pin = account_pin
-        Account.Accounts.append([self.__account_owner,self.__account_no,self.__account_created_date,self.__account_pin,self])
+        Account.Accounts.append([self.__account_owner,self.__account_no,self.__account_created_date,self.__account_pin,self,account_owner_name])
 
     def deposit(self,deposit_amount):
         available_balance = self.__account_balance
