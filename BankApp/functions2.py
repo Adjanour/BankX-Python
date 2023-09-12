@@ -180,7 +180,7 @@ def retrieve_employees():
 
 def deposit_money(account_owner_name,deposit_amount,pin):
     # Find the account by account_number, update its balance
-    if account_owner_name == Account.Accounts[0][0].get_name:
+    if account_owner_name == Account.Accounts[0][0].get_name():
         account = Account.Accounts.values()[0][4]
         pin = int(input("Please Enter Your Pin"))
         if pin == int(Account.Accounts[0][3]):
